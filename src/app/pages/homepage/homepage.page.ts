@@ -9,11 +9,14 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateModelDialogComponent } from '../../components/create-model-dialog/create-model-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpdateModelDialogComponent } from '../../components/update-model-dialog/update-model-dialog.component';
+import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [ModelDetailComponent, ModelListComponent, MatButtonModule, MatDialogModule],
+  imports: [ModelDetailComponent, ModelListComponent, MatButtonModule, MatFormFieldModule, MatFormField, MatLabel, FormsModule, MatInputModule],
   templateUrl: './homepage.page.html',
   styleUrl: './homepage.page.scss'
 })
@@ -21,7 +24,9 @@ export class HomepagePage implements OnInit {
 
   constructor(private modelService: ModelService, private router: Router, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
-  public models: Model[] | undefined;
+  public models: Model[] = [];
+  public modelsFitlred: Model[] | undefined;
+  public fitlertext: string = '';
 
   public currentModel: Model | undefined;
 
@@ -84,7 +89,19 @@ export class HomepagePage implements OnInit {
   getData() {
     this.modelService.getModels().subscribe(res => {
       this.models = res;
+      this.modelsFitlred = res;
     })
+  }
+
+  filterResults(text: string) {
+    if (!text) {
+      this.modelsFitlred = this.models;
+      return;
+    }
+    if (this.models)
+      this.modelsFitlred = this.models.filter(
+        value => value?.name?.toLowerCase().includes(text.toLowerCase())
+      );
   }
 
 

@@ -1,11 +1,24 @@
 <div class="header-layout">
-    <h1>Collection</h1>
+    <div class="left-header">
+
+        <h1>Collection</h1>
+        <mat-form-field>
+            <mat-label>Filtrer par Nom</mat-label>
+            <input matInput type="text" placeholder="Filtrer par nom" #filter [(ngModel)]="fitlertext"
+                (keydown)="(filterResults(filter.value))">
+            @if (fitlertext) {
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="filterResults(fitlertext='')">
+                <i class="material-icons">close</i>
+            </button>
+            }
+        </mat-form-field>
+    </div>
     <button mat-raised-button color="primary" (click)="openModal()"><i class="material-icons">add</i> Ajouter un
         Modèle</button>
 </div>
 
 <div class="model-layout">
-    <app-model-list [models]="models" (model)="newCurrentModel($event)"></app-model-list>
+    <app-model-list [models]="modelsFitlred" (model)="newCurrentModel($event)"></app-model-list>
     <app-model-detail [model]="currentModel" (deleteModel)="deleteModel($event)"
         (updateModel)="openDialogUpdate($event)"></app-model-detail>
 </div>
