@@ -4,6 +4,5 @@ import { CreateModelComponent } from './components/create-model/create-model.com
 
 export const routes: Routes = [
     { path: '', component: HomepagePage },
-    { path: 'create', component: CreateModelComponent },
 
 ];

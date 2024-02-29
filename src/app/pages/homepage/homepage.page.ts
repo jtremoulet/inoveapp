@@ -99,9 +99,10 @@ export class HomepagePage implements OnInit {
       return;
     }
     if (this.models)
-      this.modelsFitlred = this.models.filter(
-        value => value?.name?.toLowerCase().includes(text.toLowerCase())
-      );
+      this.currentModel = undefined;
+    this.modelsFitlred = this.models.filter(
+      value => value?.name?.toLowerCase().includes(text.toLowerCase())
+    );
   }
 
 

@@ -5,7 +5,7 @@
         <mat-form-field>
             <mat-label>Filtrer par Nom</mat-label>
             <input matInput type="text" placeholder="Filtrer par nom" #filter [(ngModel)]="fitlertext"
-                (keydown)="(filterResults(filter.value))">
+                (keyup)="(filterResults(filter.value))">
             @if (fitlertext) {
             <button matSuffix mat-icon-button aria-label="Clear" (click)="filterResults(fitlertext='')">
                 <i class="material-icons">close</i>
