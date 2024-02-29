@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>Créer un Modèle 3D</h2>
+<mat-dialog-content class="mat-typography">
+    <app-create-model (newModel)="newModelReceived($event)"></app-create-model>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Annuler</button>
+</mat-dialog-actions>

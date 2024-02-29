@@ -22,8 +22,7 @@ export class ModelService {
   createModel(model: Model): Observable<any> {
     const body = {
       ...model,
-      date: new Date(),
-      modelName: model.name
+      date: new Date()
     }
     return this.http.post<any>(this.apiModel, body);
   }

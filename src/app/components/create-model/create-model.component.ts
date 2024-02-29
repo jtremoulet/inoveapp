@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ModelService } from '../../services/model.service';
 import { MatButtonModule } from '@angular/material/button';
 import { Model } from '../../models/model.model';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-model',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, HttpClientModule],
   templateUrl: './create-model.component.html',
   styleUrl: './create-model.component.scss'
 })
 export class CreateModelComponent {
 
-  constructor(private modelService: ModelService) { }
+  @Output() newModel = new EventEmitter<Model>;
 
   modelForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -25,16 +25,14 @@ export class CreateModelComponent {
   })
 
   onSubmit() {
-    console.log(this.modelForm);
     const model: Model = {
       name: this.modelForm.controls.name.value,
       author: this.modelForm.controls.author.value,
       polygons: this.modelForm.controls.polygons.value,
-      description: this.modelForm.controls.description.value,
-      date: new Date(),
-      modelName: this.modelForm.controls.name.value
+      description: this.modelForm.controls.description.value
     }
-    this.modelService.createModel(model).subscribe();
+
+    this.newModel.emit(model);
 
   }
 
