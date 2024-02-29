@@ -1,9 +1,9 @@
 export interface Model {
-    id: string;
-    name: string;
-    description: string;
-    date: Date;
-    author: string;
-    polygons: number;
-    modelName: string;
+    id?: string | null;
+    name: string | null;
+    description: string | null;
+    date: Date | null;
+    author: string | null;
+    polygons: number | null;
+    modelName: string | null;
 }

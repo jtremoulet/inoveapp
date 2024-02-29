@@ -1,4 +1,13 @@
-.homepage-layout {
+.header-layout {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.model-layout {
     background-color: whitesmoke;
     display: flex;
     gap: 2rem;

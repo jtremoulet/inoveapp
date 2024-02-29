@@ -1,4 +1,10 @@
-<div class="homepage-layout">
+<div class="header-layout">
+    <h1>Collection</h1>
+    <button mat-raised-button color="primary" (click)="createModel()"><i class="material-icons">plus_one</i> Ajouter un
+        Modèle</button>
+</div>
+
+<div class="model-layout">
     <app-model-list [models]="models" (model)="newCurrentModel($event)"></app-model-list>
     <app-model-detail [model]="currentModel"></app-model-detail>
 </div>

@@ -13,7 +13,18 @@ export class ModelService {
 
   constructor(private http: HttpClient) { }
 
+  apiModel = `${this.apiUrl}/models`;
+
   getModels(): Observable<Array<Model>> {
-    return this.http.get<Array<Model>>(`${this.apiUrl}/models`);
+    return this.http.get<Array<Model>>(this.apiModel);
+  }
+
+  createModel(model: Model): Observable<any> {
+    const body = {
+      ...model,
+      date: new Date(),
+      modelName: model.name
+    }
+    return this.http.post<any>(this.apiModel, body);
   }
 }
