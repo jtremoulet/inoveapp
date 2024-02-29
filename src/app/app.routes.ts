@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ModelListComponent } from './components/model-list/model-list.component';
+import { HomepagePage } from './pages/homepage/homepage.page';
 
 export const routes: Routes = [
-    { path: '', component: ModelListComponent }
+    { path: '', component: HomepagePage }
 ];

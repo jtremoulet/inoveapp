@@ -1,0 +1,26 @@
+@if (model) {
+<mat-card class="model-detail-card">
+    <mat-card-header>
+        <mat-card-title>{{model.name}}</mat-card-title>
+        <mat-card-subtitle>{{model.author}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="assets/png/{{model.modelName}}.png" alt="{{model.modelName}}">
+    <mat-card-content>
+        <p>
+            <span class="label">Publié le : </span>{{model.date | date:'fullDate':'':'fr-FR' }}
+        </p>
+        <p>
+            <span class="label">Polygones : </span>{{model.polygons}}
+        </p>
+        <p>
+            <span class="label">Description : </span>{{model.description}}
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button>Modifier A BRANCHER</button>
+        <button mat-button>Supprimer A BRANCHER</button>
+    </mat-card-actions>
+</mat-card>
+}@else {
+<p>Choisisez un modèle dans la liste de gauche.</p>
+}

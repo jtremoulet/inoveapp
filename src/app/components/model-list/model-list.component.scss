@@ -1,15 +1,17 @@
 .models-list {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 1rem;
 
     .model-card {
         max-width: 300px;
+        cursor: pointer;
 
         mat-card-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 1rem;
 
             img.model-image {
                 width: 80px;

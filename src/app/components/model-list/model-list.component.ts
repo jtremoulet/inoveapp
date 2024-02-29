@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, LOCALE_ID, OnInit, Output } from '@angular/core';
 import { ModelService } from '../../services/model.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -15,16 +15,14 @@ registerLocaleData(localeFr);
   templateUrl: './model-list.component.html',
   styleUrl: './model-list.component.scss'
 })
-export class ModelListComponent implements OnInit {
+export class ModelListComponent {
 
-  models: Model[] = [];
+  @Input() models: Model[] | undefined;
 
-  constructor(private modelService: ModelService) { }
+  @Output() model = new EventEmitter<Model>();
 
-  ngOnInit(): void {
-    this.modelService.getModels().subscribe(res => {
-      this.models = res;
-    })
+  onClick(model: Model) {
+    this.model.emit(model);
   }
 
 }
