@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>Modifier le modèle {{data.model.name}}</h2>
+<mat-dialog-content class="mat-typography">
+    <app-update-model (newModel)="newModelReceived($event)" [model]="data?.model"></app-update-model>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Annuler</button>
+</mat-dialog-actions>

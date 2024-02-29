@@ -28,7 +28,13 @@ export class ModelService {
   }
 
   deleteModel(id: string): Observable<Model> {
-    console.log(id)
     return this.http.delete<Model>(`${this.apiModel}/${id}`);
+  }
+
+  updateModel(model: Model): Observable<Model> {
+    const body = {
+      ...model
+    }
+    return this.http.put<any>(`${this.apiModel}/${model.id}`, body);
   }
 }

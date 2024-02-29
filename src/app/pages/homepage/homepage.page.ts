@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateModelDialogComponent } from '../../components/create-model-dialog/create-model-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UpdateModelDialogComponent } from '../../components/update-model-dialog/update-model-dialog.component';
 
 @Component({
   selector: 'app-homepage',
@@ -41,6 +42,15 @@ export class HomepagePage implements OnInit {
     });
   }
 
+  openDialogUpdate(model: Model) {
+    const dialogRef = this.dialog.open(UpdateModelDialogComponent, { data: { model } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.updateModel(result);
+    });
+  }
+
   createModel(model: Model) {
     this.modelService.createModel(model).subscribe(res => {
       this._snackBar.open(`Le Modèle ${model.name} a bien été créé`, 'X', { duration: 6000 });
@@ -54,6 +64,15 @@ export class HomepagePage implements OnInit {
       this.modelService.deleteModel(model.id).subscribe(res => {
         this._snackBar.open(`Le Modèle ${model.name} a bien été supprimé`, 'X', { duration: 6000 });
         this.refreshPage();
+      });
+  }
+
+  updateModel(model: Model) {
+    if (model.id)
+      this.modelService.updateModel(model).subscribe(res => {
+        this._snackBar.open(`Le Modèle ${model.name} a bien été mis à jour`, 'X', { duration: 6000 });
+        this.getData();
+        this.currentModel = res;
       });
   }
 

@@ -1,10 +1,11 @@
 <div class="header-layout">
     <h1>Collection</h1>
-    <button mat-raised-button color="primary" (click)="openModal()"><i class="material-icons">plus_one</i> Ajouter un
+    <button mat-raised-button color="primary" (click)="openModal()"><i class="material-icons">add</i> Ajouter un
         Modèle</button>
 </div>
 
 <div class="model-layout">
     <app-model-list [models]="models" (model)="newCurrentModel($event)"></app-model-list>
-    <app-model-detail [model]="currentModel" (deleteModel)="deleteModel($event)"></app-model-detail>
+    <app-model-detail [model]="currentModel" (deleteModel)="deleteModel($event)"
+        (updateModel)="openDialogUpdate($event)"></app-model-detail>
 </div>

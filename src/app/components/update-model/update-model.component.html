@@ -1,0 +1,24 @@
+<form class="form-model" [formGroup]="modelForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+        <mat-label>Nom du Modèle</mat-label>
+        <input matInput required formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Auteur</mat-label>
+        <input matInput required formControlName="author">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Nombre de polygones</mat-label>
+        <input matInput type="number" required formControlName="polygons">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!modelForm.valid">Modifier le Modèle</button>
+</form>
