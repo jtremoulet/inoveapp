@@ -1,4 +1,4 @@
-import { Component, Input, LOCALE_ID, input } from '@angular/core';
+import { Component, EventEmitter, Input, LOCALE_ID, Output, input } from '@angular/core';
 import { Model } from '../../models/model.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,5 +17,17 @@ registerLocaleData(localeFr);
 export class ModelDetailComponent {
 
   @Input() model: Model | undefined;
+
+  @Output() deleteModel = new EventEmitter<Model>();
+
+  @Output() updateModel = new EventEmitter<Model>();
+
+  remove() {
+    this.deleteModel.emit(this.model);
+  }
+
+  update() {
+    this.updateModel.emit(this.model);
+  }
 
 }

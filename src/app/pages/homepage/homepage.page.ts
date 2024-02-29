@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateModelDialogComponent } from '../../components/create-model-dialog/create-model-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-homepage',
@@ -17,16 +18,14 @@ import { CreateModelDialogComponent } from '../../components/create-model-dialog
 })
 export class HomepagePage implements OnInit {
 
-  constructor(private modelService: ModelService, private router: Router, public dialog: MatDialog) { }
+  constructor(private modelService: ModelService, private router: Router, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   public models: Model[] | undefined;
 
   public currentModel: Model | undefined;
 
   ngOnInit(): void {
-    this.modelService.getModels().subscribe(res => {
-      this.models = res;
-    })
+    this.getData();
   }
 
   newCurrentModel(event: Model) {
@@ -43,7 +42,30 @@ export class HomepagePage implements OnInit {
   }
 
   createModel(model: Model) {
-    this.modelService.createModel(model).subscribe();
+    this.modelService.createModel(model).subscribe(res => {
+      this._snackBar.open(`Le Modèle ${model.name} a bien été créé`, 'X', { duration: 6000 });
+      this.getData();
+      this.currentModel = res;
+    });
+  }
+
+  deleteModel(model: Model) {
+    if (model.id)
+      this.modelService.deleteModel(model.id).subscribe(res => {
+        this._snackBar.open(`Le Modèle ${model.name} a bien été supprimé`, 'X', { duration: 6000 });
+        this.refreshPage();
+      });
+  }
+
+  refreshPage() {
+    this.currentModel = undefined;
+    this.getData();
+  }
+
+  getData() {
+    this.modelService.getModels().subscribe(res => {
+      this.models = res;
+    })
   }
 
 

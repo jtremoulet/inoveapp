@@ -19,11 +19,16 @@ export class ModelService {
     return this.http.get<Array<Model>>(this.apiModel);
   }
 
-  createModel(model: Model): Observable<any> {
+  createModel(model: Model): Observable<Model> {
     const body = {
       ...model,
       date: new Date()
     }
-    return this.http.post<any>(this.apiModel, body);
+    return this.http.post<Model>(this.apiModel, body);
+  }
+
+  deleteModel(id: string): Observable<Model> {
+    console.log(id)
+    return this.http.delete<Model>(`${this.apiModel}/${id}`);
   }
 }

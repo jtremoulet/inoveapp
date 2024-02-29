@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class CreateModelComponent {
 
-  @Output() newModel = new EventEmitter<Model>;
+  @Output() newModel = new EventEmitter<Model>();
 
   modelForm = new FormGroup({
     name: new FormControl('', Validators.required),
